@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Facebook News Feed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 500px;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .post {
+            background: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .actions button {
+            margin: 5px;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .like { background-color: #1877f2; color: white; }
+        .share { background-color: #34a853; color: white; }
+        .flag { background-color: #ea4335; color: white; }
+        .ignore { background-color: #777; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Mock Facebook News Feed</h2>
+        
+        <div class="post">
+            <h3>Breaking News: Scientists Discover New Planet!</h3>
+            <img src="https://via.placeholder.com/450" alt="news-image">
+            <p>Astronomers have identified a new exoplanet that could potentially support life.</p>
+            <div class="actions">
+                <button class="like">Like 👍</button>
+                <button class="share">Share 🔄</button>
+                <button class="flag">Flag as Fake 🚩</button>
+                <button class="ignore">Ignore ❌</button>
+            </div>
+        </div>
+        
+        <div class="post">
+            <h3>Government Plans to Ban Social Media for Teens</h3>
+            <img src="https://via.placeholder.com/450" alt="news-image">
+            <p>Rumors suggest that a new policy might restrict social media access for users under 18.</p>
+            <div class="actions">
+                <button class="like">Like 👍</button>
+                <button class="share">Share 🔄</button>
+                <button class="flag">Flag as Fake 🚩</button>
+                <button class="ignore">Ignore ❌</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
