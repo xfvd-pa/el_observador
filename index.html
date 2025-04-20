@@ -3,63 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mock Facebook News Feed</title>
+    <title>Mock Facebook Feed</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f0f2f5; }
         .navbar {
-            background: white;
-            padding: 10px 20px;
+            background-color: #ffffff;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
-        .navbar img {
-            height: 40px;
-        }
-        .container {
-            width: 500px;
-            background: white;
-            padding: 20px;
+        .navbar img { height: 40px; }
+        .main {
+            display: flex;
+            max-width: 1200px;
             margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar, .rightbar {
+            width: 250px;
+            padding: 10px;
+        }
+        .feed {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .story-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .story {
+            width: 100px;
+            text-align: center;
+        }
+        .story img {
+            width: 100%; border-radius: 10px; height: 150px; object-fit: cover;
         }
         .post {
-            background: #ffffff;
+            background: #fff;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .post-header {
             display: flex;
-            align-items: center;
             gap: 10px;
+            align-items: center;
         }
         .post-header img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 40px; height: 40px; border-radius: 50%;
         }
-        .post-header h3 {
-            margin: 0;
-            font-size: 16px;
+        .post-header div {
+            display: flex;
+            flex-direction: column;
         }
-        .post-header small {
-            color: gray;
-        }
+        .post-header h4 { font-size: 16px; }
+        .post-header small { color: gray; }
         .post img {
             width: 100%;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-top: 10px;
         }
         .actions {
@@ -70,58 +82,70 @@
         .actions button {
             background: none;
             border: none;
-            padding: 8px;
             cursor: pointer;
+            color: #65676b;
             font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="FB Logo">
+        <input type="text" placeholder="Search Facebook" style="padding: 6px 12px; border-radius: 20px; border: 1px solid #ccc;">
     </div>
-    
-    <div class="container">
-        <div class="post">
-            <div class="post-header">
-                <img src="https://via.placeholder.com/40" alt="Profile Picture">
-                <div>
-                    <h3>Cooking Wild <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Twitter_Verified_Badge.svg" width="15"></h3>
-                    <small>9h · 🌎</small>
+
+    <div class="main">
+        <div class="sidebar">
+            <p><b>Ximena Venis</b></p>
+            <p>Meta AI</p>
+            <p>Amigos</p>
+            <p>Grupos</p>
+            <p>Marketplace</p>
+        </div>
+
+        <div class="feed">
+            <div class="story-container">
+                <div class="story">
+                    <img src="https://via.placeholder.com/100x150" alt="story">
+                    <small>Ana</small>
+                </div>
+                <div class="story">
+                    <img src="https://via.placeholder.com/100x150" alt="story">
+                    <small>Leo</small>
                 </div>
             </div>
-            <p>We know what happened after the big argument...</p>
-            <img src="https://via.placeholder.com/450" alt="news-image">
-            <p><b>DONALD TRUMP GIVES BLUNT RESPONSE WHEN ASKED IF HE KICKED ZELENSKY OUT OF WHITE HOUSE</b></p>
-            <div class="actions">
-                <button>👍 Me gusta</button>
-                <button>💬 Comentar</button>
-                <button>🔄 Compartir</button>
-                <button>🚩 Flag</button>
-            </div>
-        </div>
-        
-        <div class="post">
-            <div class="post-header">
-                <img src="https://via.placeholder.com/40" alt="Profile Picture">
-                <div>
-                    <h3>TN5 Telenoticias <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Twitter_Verified_Badge.svg" width="15"></h3>
-                    <small>1d · ⚙️</small>
+
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://via.placeholder.com/40" alt="pfp">
+                    <div>
+                        <h4>Tomás Figueroa</h4>
+                        <small>28 min · Castellabate</small>
+                    </div>
+                </div>
+                <p>Beauty in life.</p>
+                <img src="https://via.placeholder.com/450x250" alt="beach">
+                <div class="actions">
+                    <button onclick="logAction('Like - Tomás')">👍 Like</button>
+                    <button onclick="logAction('Comment - Tomás')">💬 Comment</button>
+                    <button onclick="logAction('Share - Tomás')">🔄 Share</button>
+                    <button onclick="logAction('Flag - Tomás')">🚩 Flag</button>
                 </div>
             </div>
-            <p>Entre recuerdos, amor y dolor, su madre sigue sintiendo su presencia en cada paso de su vida.</p>
-            <img src="https://via.placeholder.com/450" alt="news-image">
-            <p><b>Madre de Carlos Collier comparte triste mensaje en el cumpleaños de su hijo</b></p>
-            <div class="actions">
-                <button>👍 Me gusta</button>
-                <button>💬 Comentar</button>
-                <button>🔄 Compartir</button>
-                <button>🚩 Flag</button>
-            </div>
+        </div>
+
+        <div class="rightbar">
+            <p><b>Publicidad</b></p>
+            <img src="https://via.placeholder.com/200x100" style="border-radius: 10px;">
+            <img src="https://via.placeholder.com/200x100" style="border-radius: 10px; margin-top: 10px;">
         </div>
     </div>
+
+    <script>
+        function logAction(action) {
+            console.log("User clicked: " + action);
+            alert("Logged: " + action);
+        }
+    </script>
 </body>
 </html>
