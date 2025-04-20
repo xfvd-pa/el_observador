@@ -1,161 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finx-Style Mock Feed</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock News Feed - Honduras</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f6;
+      padding: 0;
     }
-
     .navbar {
       background-color: white;
       padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #e0e0e0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      border-bottom: 1px solid #ccc;
     }
-
-    .navbar h1 {
-      font-size: 20px;
-      color: #222;
-    }
-
     .container {
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 600px;
+      margin: 30px auto;
     }
-
-    .post-card {
+    .post {
       background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      padding: 20px;
+      border-radius: 10px;
+      padding: 15px;
       margin-bottom: 20px;
-      transition: all 0.2s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    .post-card:hover {
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    }
-
     .post-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
     }
-
     .post-header img {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      object-fit: cover;
+      margin-right: 10px;
     }
-
-    .post-info h3 {
-      margin: 0;
-      font-size: 16px;
-      color: #222;
+    .post-header .info {
+      display: flex;
+      flex-direction: column;
     }
-
-    .post-info small {
-      color: #888;
+    .post-header .info strong {
+      font-size: 15px;
     }
-
+    .post-header .info small {
+      color: gray;
+    }
     .post-content p {
       margin: 10px 0;
-      color: #333;
     }
-
-    .post-image {
+    .post-content img {
       width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
+      border-radius: 8px;
     }
-
-    .post-actions {
+    .reactions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 0;
+      color: #606770;
+    }
+    .reactions span {
+      font-size: 14px;
+    }
+    .actions {
       display: flex;
       justify-content: space-around;
-      padding-top: 12px;
-      border-top: 1px solid #eee;
-      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #ccc;
     }
-
-    .post-actions button {
+    .actions button {
       background: none;
       border: none;
-      color: #555;
+      color: #65676b;
       font-size: 14px;
       cursor: pointer;
     }
-
-    .post-actions button:hover {
-      color: #007bff;
+    .comment-section {
+      margin-top: 10px;
+    }
+    .comment-section input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
     }
   </style>
 </head>
 <body>
   <div class="navbar">
-    <h1>Finx Feed</h1>
-    <input type="text" placeholder="Search..." style="padding: 6px 12px; border-radius: 20px; border: 1px solid #ccc;" />
+    <h2>Mock News Feed</h2>
+    <input type="text" placeholder="Buscar en Facebook..." style="padding: 6px 12px; border-radius: 20px; border: 1px solid #ccc;">
   </div>
 
   <div class="container">
-    <div class="post-card">
+    <!-- Post 1 -->
+    <div class="post">
       <div class="post-header">
-        <img src="https://via.placeholder.com/48" alt="profile" />
-        <div class="post-info">
-          <h3>Lina Morales</h3>
-          <small>2h ago · 🌍 Public</small>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Logo_Hoy_Mismo_Honduras.png/600px-Logo_Hoy_Mismo_Honduras.png" alt="Hoy Mismo logo">
+        <div class="info">
+          <strong>Noticiero Hoy Mismo <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Twitter_Verified_Badge.svg" width="14"></strong>
+          <small>1 min · 🌐</small>
         </div>
       </div>
       <div class="post-content">
-        <p>“The future depends on what we do in the present.” - Gandhi 🌱</p>
-        <img class="post-image" src="https://via.placeholder.com/600x300" alt="post" />
+        <p>🔵 La joven permaneció sedada e intubada, pero finalmente murió 😢<br>
+        <a href="#">https://www.radiohrn.hn/sepultan-en-cortes-a-quinceanera</a></p>
+        <img src="https://i.imgur.com/5H6wO6X.png" alt="Ataúd en velorio">
       </div>
-      <div class="post-actions">
-        <button onclick="logAction('Like - Lina')">👍 Like</button>
-        <button onclick="logAction('Comment - Lina')">💬 Comment</button>
-        <button onclick="logAction('Share - Lina')">🔁 Share</button>
-        <button onclick="logAction('Flag - Lina')">🚩 Flag</button>
+      <div class="reactions">
+        😢 😲 <span>18</span>
+      </div>
+      <div class="actions">
+        <button>👍 Me gusta</button>
+        <button>💬 Comentar</button>
+        <button>📤 Enviar</button>
+        <button>🔄 Compartir</button>
+      </div>
+      <div class="comment-section">
+        <input type="text" placeholder="Escribe un comentario...">
       </div>
     </div>
 
-    <div class="post-card">
+    <!-- Post 2 -->
+    <div class="post">
       <div class="post-header">
-        <img src="https://via.placeholder.com/48" alt="profile" />
-        <div class="post-info">
-          <h3>Ali Nasser</h3>
-          <small>5h ago · 🎥 Video</small>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/TSi_Honduras_logo.png/600px-TSi_Honduras_logo.png" alt="TSi logo">
+        <div class="info">
+          <strong>TSiHonduras <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Twitter_Verified_Badge.svg" width="14"></strong>
+          <small>8 min · 🌐</small>
         </div>
       </div>
       <div class="post-content">
-        <p>Behind the scenes of our latest production — coming soon! 🎬</p>
-        <img class="post-image" src="https://via.placeholder.com/600x300" alt="post" />
+        <p>🔴 Participó en el “juego” durante una fiesta y no sabe quién es el padre. <br>
+        <a href="#">https://www.tunota.com/.../adolescente-queda-embarazada</a></p>
+        <img src="https://i.imgur.com/MOadV8p.png" alt="Prueba de embarazo">
       </div>
-      <div class="post-actions">
-        <button onclick="logAction('Like - Ali')">👍 Like</button>
-        <button onclick="logAction('Comment - Ali')">💬 Comment</button>
-        <button onclick="logAction('Share - Ali')">🔁 Share</button>
-        <button onclick="logAction('Flag - Ali')">🚩 Flag</button>
+      <div class="reactions">
+        😱 😢 <span>3</span>
+      </div>
+      <div class="actions">
+        <button>👍 Me gusta</button>
+        <button>💬 Comentar</button>
+        <button>📤 Enviar</button>
+        <button>🔄 Compartir</button>
+      </div>
+      <div class="comment-section">
+        <input type="text" placeholder="Escribe un comentario...">
       </div>
     </div>
   </div>
-
-  <script>
-    function logAction(action) {
-      console.log("User clicked: " + action);
-      alert("Logged: " + action);
-    }
-  </script>
 </body>
 </html>
-
