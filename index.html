@@ -98,109 +98,44 @@
   </div>
 
   <div class="container">
-    <!-- Real News 1 -->
-    <div class="post">
-      <div class="post-header">
-        <img src="https://via.placeholder.com/40" alt="perfil">
-        <div class="info">
-          <strong>DNVT Noticias</strong>
-          <small>Hace 1 h · 🌐 Público</small>
-        </div>
-      </div>
-      <div class="post-content">
-        <p>🚨 La DNVT decomisó más de 3,500 licencias en Semana Santa; se registraron 155 accidentes.</p>
-        <img src="https://via.placeholder.com/500x300" alt="operativo">
-      </div>
-      <div class="reactions">😱 🚗 <span>36</span></div>
-      <div class="actions">
-        <button>👍 Me gusta</button>
-        <button>💬 Comentar</button>
-        <button>🔁 Compartir</button>
-      </div>
-      <div class="comment-section">
-        <input type="text" placeholder="Escribe un comentario...">
-      </div>
-    </div>
-
-    <!-- Misinformation 1 -->
-    <div class="post">
-      <div class="post-header">
-        <img src="https://via.placeholder.com/40" alt="perfil">
-        <div class="info">
-          <strong>Noticias Viral HN</strong>
-          <small>Hace 3 h · 🌐 Tendencia</small>
-        </div>
-      </div>
-      <div class="post-content">
-        <p>⚡🔌 “Toda Honduras se quedará sin energía este lunes por apagón nacional”, afirma publicación viral — sin fuente oficial.</p>
-        <img src="https://via.placeholder.com/500x300" alt="corte de luz">
-      </div>
-      <div class="reactions">😱 😬 <span>128</span></div>
-      <div class="actions">
-        <button>👍 Me gusta</button>
-        <button>💬 Comentar</button>
-        <button>🔁 Compartir</button>
-      </div>
-      <div class="comment-section">
-        <input type="text" placeholder="Escribe un comentario...">
-      </div>
-    </div>
-
-    <!-- Disinformation 1 -->
-    <div class="post">
-      <div class="post-header">
-        <img src="https://via.placeholder.com/40" alt="perfil">
-        <div class="info">
-          <strong>Política Hoy</strong>
-          <small>Hace 2 h · 🌐 Patrocinado</small>
-        </div>
-      </div>
-      <div class="post-content">
-        <p>🗳️ “Yani Rosenthal confirma pacto secreto con Salvador Nasralla para repartirse poder tras elecciones” — sin evidencia clara.</p>
-        <img src="https://via.placeholder.com/500x300" alt="pacto político">
-      </div>
-      <div class="reactions">😡 🤔 <span>88</span></div>
-      <div class="actions">
-        <button>👍 Me gusta</button>
-        <button>💬 Comentar</button>
-        <button>🔁 Compartir</button>
-      </div>
-      <div class="comment-section">
-        <input type="text" placeholder="Escribe un comentario...">
-      </div>
-    </div>
-
-    <!-- Algorithmic Bias 1 -->
-    <div class="post">
-      <div class="post-header">
-        <img src="https://via.placeholder.com/40" alt="perfil">
-        <div class="info">
-          <strong>El Dato Curioso</strong>
-          <small>Hace 6 h · 🌐 Sugerido para ti</small>
-        </div>
-      </div>
-      <div class="post-content">
-        <p>🧠🚨 “Capturan a miembro de *los Illuminati* en Honduras: ¿fin del misterio?” — título viral alimenta teorías sin base.</p>
-        <img src="https://via.placeholder.com/500x300" alt="illuminati">
-      </div>
-      <div class="reactions">👀 🧠 <span>54</span></div>
-      <div class="actions">
-        <button>👍 Me gusta</button>
-        <button>💬 Comentar</button>
-        <button>🔁 Compartir</button>
-      </div>
-      <div class="comment-section">
-        <input type="text" placeholder="Escribe un comentario...">
-      </div>
-    </div>
+    <!-- Aquí van los 8 posts -->
+    <!-- Los posts se mantienen como antes, pero el orden será aleatorizado por JavaScript -->
+    <!-- (Por simplicidad, los 8 bloques de post ya están definidos arriba) -->
   </div>
-   <script>
+
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const container = document.querySelector(".container");
-      const posts = Array.from(container.querySelectorAll(".post"));
-      const shuffled = posts.sort(() => 0.5 - Math.random());
-      container.innerHTML = '';
-      shuffled.forEach(post => container.appendChild(post));
+
+      const postsHTML = [
+        `<!-- Real News 1 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>DNVT Noticias</strong><small>Hace 1 h · 🌐 Público</small></div></div><div class="post-content"><p>🚨 La DNVT decomisó más de 3,500 licencias en Semana Santa; se registraron 155 accidentes.</p><img src="https://via.placeholder.com/500x300" alt="operativo"></div><div class="reactions">😱 🚗 <span>36</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Real News 2 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>DGT Honduras</strong><small>Hace 2 h · 🌐 Público</small></div></div><div class="post-content"><p>📱🚗 DGT ahora revisa tus redes sociales para detectar si violaste las leyes de tránsito.</p><img src="https://via.placeholder.com/500x300" alt="tránsito redes"></div><div class="reactions">👮 📲 <span>18</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Misinformation 1 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>Noticias Viral HN</strong><small>Hace 3 h · 🌐 Tendencia</small></div></div><div class="post-content"><p>⚡🔌 “Toda Honduras se quedará sin energía este lunes por apagón nacional”, afirma publicación viral — sin fuente oficial.</p><img src="https://via.placeholder.com/500x300" alt="corte de luz"></div><div class="reactions">😱 😬 <span>128</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Misinformation 2 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>Salud y Hogar HN</strong><small>Hace 5 h · 🌐 Recomendado</small></div></div><div class="post-content"><p>🍔 “La OMS advierte que en 2030 la mitad de los hondureños serán clínicamente obesos” — declaración sin base científica.</p><img src="https://via.placeholder.com/500x300" alt="obesidad"></div><div class="reactions">😨 📉 <span>102</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Disinformation 1 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>Política Hoy</strong><small>Hace 2 h · 🌐 Patrocinado</small></div></div><div class="post-content"><p>🗳️ “Yani Rosenthal confirma pacto secreto con Salvador Nasralla para repartirse poder tras elecciones” — sin evidencia clara.</p><img src="https://via.placeholder.com/500x300" alt="pacto político"></div><div class="reactions">😡 🤔 <span>88</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Disinformation 2 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>EcoPolítica Noticias</strong><small>Hace 4 h · 🌐 Controversial</small></div></div><div class="post-content"><p>⛪ “El Papa tilda a *todas* las mujeres de neuróticas en discurso polémico” — tergiversación intencional del mensaje real.</p><img src="https://via.placeholder.com/500x300" alt="papa"></div><div class="reactions">😤 🙄 <span>67</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Algorithmic Bias 1 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>El Dato Curioso</strong><small>Hace 6 h · 🌐 Sugerido para ti</small></div></div><div class="post-content"><p>🧠🚨 “Capturan a miembro de *los Illuminati* en Honduras: ¿fin del misterio?” — título viral alimenta teorías sin base.</p><img src="https://via.placeholder.com/500x300" alt="illuminati"></div><div class="reactions">👀 🧠 <span>54</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`,
+
+        `<!-- Algorithmic Bias 2 -->
+        <div class="post"><div class="post-header"><img src="https://via.placeholder.com/40" alt="perfil"><div class="info"><strong>Tendencias HN</strong><small>Hace 7 h · 🌐 Popular</small></div></div><div class="post-content"><p>⚡🇭🇳 “Solo los ricos: el primer Cybertruck en Honduras genera indignación” — destaca polarización para maximizar clics.</p><img src="https://via.placeholder.com/500x300" alt="cybertruck"></div><div class="reactions">😡 🚘 <span>143</span></div><div class="actions"><button>👍 Me gusta</button><button>💬 Comentar</button><button>🔁 Compartir</button></div><div class="comment-section"><input type="text" placeholder="Escribe un comentario..."></div></div>`
+      ];
+
+      postsHTML.sort(() => Math.random() - 0.5).forEach(html => {
+        container.insertAdjacentHTML("beforeend", html);
+      });
     });
   </script>
 </body>
