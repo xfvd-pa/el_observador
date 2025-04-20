@@ -194,5 +194,14 @@
       </div>
     </div>
   </div>
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.querySelector(".container");
+      const posts = Array.from(container.querySelectorAll(".post"));
+      const shuffled = posts.sort(() => 0.5 - Math.random());
+      container.innerHTML = '';
+      shuffled.forEach(post => container.appendChild(post));
+    });
+  </script>
 </body>
 </html>
