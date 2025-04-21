@@ -50,6 +50,12 @@
     .post-header .info small {
       color: gray;
     }
+    .verified-badge {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
     .post-content p {
       margin: 10px 0;
     }
@@ -82,6 +88,9 @@
       color: #1877f2;
       font-weight: bold;
     }
+    .like-wrapper {
+      position: relative;
+    }
     .reactions-menu {
       display: none;
       position: absolute;
@@ -96,9 +105,6 @@
       cursor: pointer;
       padding: 5px;
       font-size: 18px;
-    }
-    .like-wrapper {
-      position: relative;
     }
     .comment-section {
       margin-top: 10px;
@@ -138,152 +144,285 @@
     <h2>MiVoz</h2>
     <input type="text" placeholder="Buscar en MiVoz..." style="padding: 6px 12px; border-radius: 20px; border: 1px solid #ccc;">
   </div>
-  <div class="container" id="feed-container"></div>
-  <script>
-    const profilePics = [
-      "./assets/prof1.jpg",
-      "./assets/prof2.jpg",
-      "./assets/prof3.jpg",
-      "./assets/prof4.jpg",
-      "./assets/prof5.jpg",
-      "./assets/prof6.jpg",
-      "./assets/prof7.jpg",
-      "./assets/prof8.jpg",
-      "./assets/prof9.jpg"
-    ];
+  <div class="container">
 
-    const commentData = [
-      [
-        { name: "Ana H.", pic: profilePics[0], text: "Esto es impresionante, por fin aplican la ley." }
-      ],
-      [
-        { name: "Mario T.", pic: profilePics[1], text: "No estoy seguro de confiar en esta noticia..." }
-      ],
-      [
-        { name: "Paola R.", pic: profilePics[2], text: "Otra vez apagones, a preparar las velas." },
-        { name: "Joel B.", pic: profilePics[3], text: "Acabo de comprar helado... justo ahora pasa esto." }
-      ],
-      [],
-      [
-        { name: "Lucía V.", pic: profilePics[4], text: "Es solo un carro, no exageren." },
-        { name: "Karla C.", pic: profilePics[5], text: "Increíble que haya llegado hasta aquí." }
-      ],
-      [
-        { name: "Ernesto M.", pic: profilePics[6], text: "Ojalá no sea cierto. Muy sospechoso todo." }
-      ],
-      [],
-      [
-        { name: "Lilian Q.", pic: profilePics[7], text: "¿También van a revisar mis memes ahora?" },
-        { name: "Pedro Z.", pic: profilePics[8], text: "A un amigo ya le pusieron multa así. Es real." }
-      ]
-    ];
-
-    const posts = [
-      {
-        source: "DNVT Noticias",
-        time: "Hace 1 h",
-        text: "🚨 La DNVT decomisó más de 3,500 licencias en Semana Santa; se registraron 155 accidentes. <a href='https://www.tunota.com/honduras-hoy/dnvt-reporta-3500-licencias-decomisadas-y-155-accidentes-durante-semana-santa-2025-04-18' target='_blank'>Ver más</a>",
-        image: "./assets/dnvt.png"
-      },
-      {
-        source: "EcoPolítica Noticias",
-        time: "Hace 2 h",
-        text: "⛪ “El Papa tilda a *todas* las mujeres de neuróticas en discurso polémico” — tergiversación intencional del mensaje real.",
-        image: "./assets/papa.png"
-      },
-      {
-        source: "Noticias Viral HN",
-        time: "Hace 3 h",
-        text: "⚡🔌 “Toda Honduras se quedará sin energía este lunes por apagón nacional”, afirma publicación viral — sin fuente oficial.",
-        image: "./assets/luz.png"
-      },
-      {
-        source: "El Dato Curioso",
-        time: "Hace 4 h",
-        text: "🧠🚨 “Capturan a miembro de *los Illuminati* en Honduras: ¿fin del misterio?” — título viral alimenta teorías sin base.",
-        image: "./assets/illuminati.png"
-      },
-      {
-        source: "Tendencias HN",
-        time: "Hace 5 h",
-        text: "⚡🇭🇳 “Solo los ricos: el primer Cybertruck en Honduras genera indignación” — destaca polarización para maximizar clics. <a href='https://hch.tv/2024/08/29/el-tesla-cybertruck-debuta-en-honduras/' target='_blank'>Ver más</a>",
-        image: "./assets/tesla.png"
-      },
-      {
-        source: "Política Hoy",
-        time: "Hace 6 h",
-        text: "🗳️ BOMBA POLÍTICA: Yani Rosenthal y Nasralla habrían pactado en secreto repartirse el poder si ganan elecciones, según fuente anónima no verificada.",
-        image: "./assets/yani.png"
-      },
-      {
-        source: "Salud y Hogar HN",
-        time: "Hace 7 h",
-        text: "🍔 “La OMS advierte que en 2030 la mitad de los hondureños serán clínicamente obesos” — declaración sin base científica.",
-        image: "./assets/obesidad.png"
-      },
-      {
-        source: "DGT Honduras",
-        time: "Hace 8 h",
-        text: "📱🚗 DGT ahora revisa tus redes sociales para detectar si violaste las leyes de tránsito. <a href='https://www.latribuna.hn/2025/04/17/transito-monitorea-redes-sociales-para-detectar-infracciones-vehiculares/' target='_blank'>Ver más</a>",
-        image: "./assets/transito.png"
-      }
-    ];
-
-    const container = document.getElementById("feed-container");
-    posts.forEach((post, index) => {
-      const comments = commentData[index] || [];
-      let commentHTML = comments.map(c => `
-        <div class='comment'>
-          <img src="${c.pic}" alt="profile">
-          <div class='comment-content'>
-            <strong>${c.name}</strong>
-            <p>${c.text}</p>
-            <small>Hace ${Math.floor(Math.random() * 45 + 1)} min · 👍 ${Math.floor(Math.random() * 10)}</small>
+    <!-- POST 1: Real News - DNVT -->
+    <div class="post">
+      <div class="post-header">
+        <img src="assets/c2176463-6f15-4ee7-85c1-3605c51a6f05.png" alt="Tu Nota">
+        <div class="info">
+          <strong>Tu Nota <img src="assets/264329d5-2eef-4f65-a93a-7158dab55e46.png" class="verified-badge" alt="Verificado" /></strong>
+          <small>Hace 1 h · 🌐 Público</small>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>🚨 La DNVT decomisó más de 3,500 licencias en Semana Santa; se registraron 155 accidentes. <a href="https://www.tunota.com/honduras-hoy/dnvt-reporta-3500-licencias-decomisadas-y-155-accidentes-durante-semana-santa-2025-04-18" target="_blank">Ver más</a></p>
+        <img src="assets/dnvt.png" alt="DNVT">
+      </div>
+      <div class="actions">
+        <div class="like-wrapper">
+          <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+          <div class="reactions-menu">
+            <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
           </div>
         </div>
-      `).join('');
-
-      container.innerHTML += `
-        <div class="post">
-          <div class="post-header">
-            <img src="https://via.placeholder.com/40" alt="perfil">
-            <div class="info">
-              <strong>${post.source}</strong>
-              <small>${post.time} · 🌐 Público</small>
-            </div>
-          </div>
-          <div class="post-content">
-            <p>${post.text}</p>
-            <img src="${post.image}" alt="imagen">
-          </div>
-          <div class="actions">
-            <div class="like-wrapper">
-              <button onclick="this.classList.toggle('clicked'); const menu=this.nextElementSibling; menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
-              <div class="reactions-menu">
-                <span onclick="this.closest('.like-wrapper').querySelector('button').innerHTML='❤️ Reaccionar'; this.closest('.reactions-menu').style.display='none'">❤️</span>
-                <span onclick="this.closest('.like-wrapper').querySelector('button').innerHTML='😲 Reaccionar'; this.closest('.reactions-menu').style.display='none'">😲</span>
-                <span onclick="this.closest('.like-wrapper').querySelector('button').innerHTML='😡 Reaccionar'; this.closest('.reactions-menu').style.display='none'">😡</span>
-                <span onclick="this.closest('.like-wrapper').querySelector('button').innerHTML='😂 Reaccionar'; this.closest('.reactions-menu').style.display='none'">😂</span>
-                <span onclick="this.closest('.like-wrapper').querySelector('button').innerHTML='👍 Reaccionar'; this.closest('.reactions-menu').style.display='none'">👍</span>
-              </div>
-            </div>
-            <button onclick="this.classList.toggle('clicked')">💬 Comentar</button>
-            <button onclick="this.classList.toggle('clicked')">🔁 Compartir</button>
-            <button onclick="this.classList.toggle('clicked')">🚩 Reportar</button>
-          </div>
-          <div class="comment-section">
-            ${commentHTML}
-            ${comments.length > 0 ? `<div class='comment'>
-              <img src="https://via.placeholder.com/30" alt="perfil">
-              <div class='comment-content'>
-                <strong>Tú</strong>
-                <p><input type='text' placeholder='Escribe un comentario...' style='border: none; background: transparent; outline: none; width: 100%; font-size: 14px;'></p>
-              </div>
-            </div>` : ''}
+        <button>💬 Comentar</button>
+        <button>🔁 Compartir</button>
+        <button>🚩 Reportar</button>
+      </div>
+      <div class="comment-section">
+        <div class="comment">
+          <img src="assets/prof1.jpg" alt="Aníbal Tróchez">
+          <div class="comment-content">
+            <strong>Aníbal Tróchez</strong>
+            <p>Esto es impresionante, por fin aplican la ley.</p>
+            <small>Hace 23 min · 👍 4</small>
           </div>
         </div>
-      `;
-    });
-  </script>
-</body>
-</html>
+      </div>
+    </div>
+
+    <!-- POST 2: Disinformation - Papa -->
+    <div class="post">
+      <div class="post-header">
+        <img src="assets/prof6.jpg" alt="EcoPolítica Noticias">
+        <div class="info">
+          <strong>EcoPolítica Noticias</strong>
+          <small>Hace 2 h · 🌐 Público</small>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>⛪ “El Papa tilda a *todas* las mujeres de neuróticas en discurso polémico” — tergiversación intencional del mensaje real.</p>
+        <img src="assets/papa.png" alt="Papa">
+      </div>
+      <div class="actions">
+        <div class="like-wrapper">
+          <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+          <div class="reactions-menu">
+            <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+          </div>
+        </div>
+        <button>💬 Comentar</button>
+        <button>🔁 Compartir</button>
+        <button>🚩 Reportar</button>
+      </div>
+    </div>
+
+    <!-- POST 3: Misinformation - Blackout -->
+    <div class="post">
+      <div class="post-header">
+        <img src="assets/prof3.jpg" alt="Noticias Viral HN">
+        <div class="info">
+          <strong>Noticias Viral HN</strong>
+          <small>Hace 3 h · 🌐 Público</small>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>⚡🔌 “Toda Honduras se quedará sin energía este lunes por apagón nacional”, afirma publicación viral — sin fuente oficial.</p>
+        <img src="assets/luz.png" alt="Apagón">
+      </div>
+      <div class="actions">
+        <div class="like-wrapper">
+          <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+          <div class="reactions-menu">
+            <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+          </div>
+        </div>
+        <button>💬 Comentar</button>
+        <button>🔁 Compartir</button>
+        <button>🚩 Reportar</button>
+      </div>
+      <div class="comment-section">
+        <div class="comment">
+          <img src="assets/prof2.jpg" alt="Paola R.">
+          <div class="comment-content">
+            <strong>Olga Núñez</strong>
+            <p>Otra vez apagones, a preparar las velas.</p>
+            <small>Hace 17 min · 👍 2</small>
+          </div>
+        </div>
+        <div class="comment">
+          <img src="assets/prof3.jpg" alt="Joel B.">
+          <div class="comment-content">
+            <strong>Joel B.</strong>
+            <p>Acabo de comprar helado... justo ahora pasa esto.</p>
+            <small>Hace 8 min · 👍 1</small>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- POST 4: Disinformation - Illuminati -->
+<div class="post">
+  <div class="post-header">
+    <img src="assets/125a94cf-9584-496a-b9bd-281b24491702.png" alt="La Tribuna">
+    <div class="info">
+      <strong>La Tribuna <img src="assets/264329d5-2eef-4f65-a93a-7158dab55e46.png" class="verified-badge" alt="Verificado" /></strong>
+      <small>Hace 4 h · 🌐 Público</small>
+    </div>
+  </div>
+  <div class="post-content">
+    <p>🧠🚨 “Capturan a miembro de *los Illuminati* en Honduras: ¿fin del misterio?” — título viral alimenta teorías sin base. <a href="https://www.latribuna.hn/2025/04/16/detienen-a-un-iluminati-acusado-de-extorsion/" target="_blank">Ver más</a></p>
+    <img src="assets/illuminati.png" alt="Iluminati">
+  </div>
+  <div class="actions">
+    <div class="like-wrapper">
+      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <div class="reactions-menu">
+        <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+      </div>
+    </div>
+    <button>💬 Comentar</button>
+    <button>🔁 Compartir</button>
+    <button>🚩 Reportar</button>
+  </div>
+</div>
+
+<!-- POST 5: Algorithmic Bias - Tesla -->
+<div class="post">
+  <div class="post-header">
+    <img src="assets/2a7715fc-9bbc-4bac-9f91-17644cd8d6e6.png" alt="HCH en Vivo">
+    <div class="info">
+      <strong>HCH en Vivo</strong>
+      <small>Hace 5 h · 🌐 Público</small>
+    </div>
+  </div>
+  <div class="post-content">
+    <p>⚡🇭🇳 “Solo los ricos: el primer Cybertruck en Honduras genera indignación” — destaca polarización para maximizar clics. <a href="https://hch.tv/2024/08/29/el-tesla-cybertruck-debuta-en-honduras/" target="_blank">Ver más</a></p>
+    <img src="assets/tesla.png" alt="Tesla">
+  </div>
+  <div class="actions">
+    <div class="like-wrapper">
+      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <div class="reactions-menu">
+        <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+      </div>
+    </div>
+    <button>💬 Comentar</button>
+    <button>🔁 Compartir</button>
+    <button>🚩 Reportar</button>
+  </div>
+  <div class="comment-section">
+    <div class="comment">
+      <img src="assets/prof4.jpg" alt="Lucía V.">
+      <div class="comment-content">
+        <strong>Lucía V.</strong>
+        <p>Es solo un carro, no exageren.</p>
+        <small>Hace 13 min · 👍 3</small>
+      </div>
+    </div>
+    <div class="comment">
+      <img src="assets/prof5.jpg" alt="Wilson Roberto D.">
+      <div class="comment-content">
+        <strong>Wilson Roberto D.</strong>
+        <p>Increíble que haya llegado hasta aquí.</p>
+        <small>Hace 5 min · 👍 1</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POST 6: Disinformation - Yani & Nasralla -->
+<div class="post">
+  <div class="post-header">
+    <img src="assets/prof8.jpg" alt="Política Hoy">
+    <div class="info">
+      <strong>Política Hoy</strong>
+      <small>Hace 6 h · 🌐 Público</small>
+    </div>
+  </div>
+  <div class="post-content">
+    <p>🗳️ BOMBA POLÍTICA: Yani Rosenthal y Nasralla habrían pactado en secreto repartirse el poder si ganan elecciones, según fuente anónima no verificada.</p>
+    <img src="assets/yani.png" alt="Yani Rosenthal">
+  </div>
+  <div class="actions">
+    <div class="like-wrapper">
+      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <div class="reactions-menu">
+        <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+      </div>
+    </div>
+    <button>💬 Comentar</button>
+    <button>🔁 Compartir</button>
+    <button>🚩 Reportar</button>
+  </div>
+  <div class="comment-section">
+    <div class="comment">
+      <img src="assets/prof6.jpg" alt="Lilian Q.">
+      <div class="comment-content">
+        <strong>Lilian Quezada ❤️</strong>
+        <p>No me sorprende, siempre lo mismo en política.</p>
+        <small>Hace 10 min · 👍 2</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POST 7: Misinformation - Obesity -->
+<div class="post">
+  <div class="post-header">
+    <img src="assets/prof9.jpg" alt="Salud y Hogar HN">
+    <div class="info">
+      <strong>Salud y Hogar HN</strong>
+      <small>Hace 7 h · 🌐 Público</small>
+    </div>
+  </div>
+  <div class="post-content">
+    <p>🍔 “La OMS advierte que en 2030 la mitad de los hondureños serán clínicamente obesos” — declaración sin base científica.</p>
+    <img src="assets/obesidad.png" alt="Obesidad">
+  </div>
+  <div class="actions">
+    <div class="like-wrapper">
+      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <div class="reactions-menu">
+        <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+      </div>
+    </div>
+    <button>💬 Comentar</button>
+    <button>🔁 Compartir</button>
+    <button>🚩 Reportar</button>
+  </div>
+</div>
+
+<!-- POST 8: Algorithmic Bias - Tránsito -->
+<div class="post">
+  <div class="post-header">
+    <img src="assets/125a94cf-9584-496a-b9bd-281b24491702.png" alt="La Tribuna">
+    <div class="info">
+      <strong>La Tribuna <img src="assets/264329d5-2eef-4f65-a93a-7158dab55e46.png" class="verified-badge" alt="Verificado" /></strong>
+      <small>Hace 8 h · 🌐 Público</small>
+    </div>
+  </div>
+  <div class="post-content">
+    <p>📱🚗 DGT ahora revisa tus redes sociales para detectar si violaste las leyes de tránsito. <a href="https://www.latribuna.hn/2025/04/17/transito-monitorea-redes-sociales-para-detectar-infracciones-vehiculares/" target="_blank">Ver más</a></p>
+    <img src="assets/transito.png" alt="Transito">
+  </div>
+  <div class="actions">
+    <div class="like-wrapper">
+      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <div class="reactions-menu">
+        <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
+      </div>
+    </div>
+    <button>💬 Comentar</button>
+    <button>🔁 Compartir</button>
+    <button>🚩 Reportar</button>
+  </div>
+  <div class="comment-section">
+    <div class="comment">
+      <img src="assets/prof7.jpg" alt="Lilian Q.">
+      <div class="comment-content">
+        <strong>Lilian Quezada ❤️</strong>
+        <p>¿También van a revisar mis memes ahora?</p>
+        <small>Hace 18 min · 👍 2</small>
+      </div>
+    </div>
+    <div class="comment">
+      <img src="assets/prof8.jpg" alt="Pedro Z.">
+      <div class="comment-content">
+        <strong>Pedro Z.</strong>
+        <p>A un amigo ya le pusieron multa así. Es real.</p>
+        <small>Hace 6 min · 👍 5</small>
+      </div>
+    </div>
+  </div>
+</div>
