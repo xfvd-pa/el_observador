@@ -92,6 +92,24 @@
       color: #1877f2;
       font-weight: bold;
     }
+    .reactions-menu {
+      display: none;
+      position: absolute;
+      top: -40px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 5px 10px;
+      z-index: 100;
+    }
+    .reactions-menu span {
+      cursor: pointer;
+      padding: 5px;
+      font-size: 18px;
+    }
+    .like-wrapper {
+      position: relative;
+    }
     .comment-section {
       margin-top: 10px;
     }
@@ -131,8 +149,35 @@
     const profilePics = [
       "./assets/profile1.png",
       "./assets/profile2.png",
-      "https://via.placeholder.com/30",
+      "./assets/profile3.png",
+      "./assets/profile4.png",
       "https://via.placeholder.com/30"
+    ];
+
+    const commentData = [
+      [
+        { name: "Ana H.", pic: profilePics[0], text: "This is impressive, finally some enforcement." }
+      ],
+      [
+        { name: "Mario T.", pic: profilePics[1], text: "Not sure I trust this info..." }
+      ],
+      [
+        { name: "Paola R.", pic: profilePics[2], text: "Ugh, another blackout, prepare your candles!" },
+        { name: "Joel B.", pic: profilePics[3], text: "I just bought ice cream... classic timing." }
+      ],
+      [],
+      [
+        { name: "Lucía V.", pic: profilePics[1], text: "It’s just a car, people..." },
+        { name: "Karla C.", pic: profilePics[0], text: "Crazy how this made it here!" }
+      ],
+      [
+        { name: "Ernesto M.", pic: profilePics[4], text: "This better not be true. Shady deal!" }
+      ],
+      [],
+      [
+        { name: "Lilian Q.", pic: profilePics[3], text: "So now they’re watching our memes too?" },
+        { name: "Pedro Z.", pic: profilePics[0], text: "A friend got fined this way. Real story." }
+      ]
     ];
 
     const posts = [
@@ -186,13 +231,9 @@
       }
     ];
 
-    const comments = [
-      { name: "Carla F.", pic: profilePics[0], text: "This can't be real..." },
-      { name: "Luis H.", pic: profilePics[1], text: "We need more info before believing this." }
-    ];
-
     const container = document.getElementById("feed-container");
-    posts.forEach(post => {
+    posts.forEach((post, index) => {
+      const comments = commentData[index] || [];
       let commentHTML = comments.map(c => `
         <div class='comment'>
           <img src="${c.pic}" alt="profile">
@@ -203,6 +244,7 @@
         </div>
       `).join('');
 
+      const randomCount = Math.floor(Math.random() * 30 + 1);
       container.innerHTML += `
         <div class="post">
           <div class="post-header">
@@ -216,16 +258,25 @@
             <p>${post.text}</p>
             <img src="${post.image}" alt="imagen">
           </div>
-          <div class="reactions">👍 ❤️ 😲 😡 😂 <span>18</span></div>
+          <div class="reactions">👍 ❤️ 😲 😡 😂 <span>${randomCount} comentarios</span></div>
           <div class="actions">
-            <button onclick="this.classList.toggle('clicked')">👍 Like</button>
-            <button onclick="this.classList.toggle('clicked')">💬 Comment</button>
-            <button onclick="this.classList.toggle('clicked')">🔁 Share</button>
-            <button onclick="this.classList.toggle('clicked')">🚩 Flag</button>
+            <div class="like-wrapper">
+              <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display='flex'">👍 Reaccionar</button>
+              <div class="reactions-menu" style="display:none;">
+                <span onclick="alert('👍')">👍</span>
+                <span onclick="alert('❤️')">❤️</span>
+                <span onclick="alert('😲')">😲</span>
+                <span onclick="alert('😡')">😡</span>
+                <span onclick="alert('😂')">😂</span>
+              </div>
+            </div>
+            <button onclick="this.classList.toggle('clicked')">💬 Comentar</button>
+            <button onclick="this.classList.toggle('clicked')">🔁 Compartir</button>
+            <button onclick="this.classList.toggle('clicked')">🚩 Reportar</button>
           </div>
           <div class="comment-section">
             ${commentHTML}
-            <input type="text" placeholder="Escribe un comentario...">
+            ${comments.length > 0 ? '<input type="text" placeholder="Escribe un comentario...">' : ''}
           </div>
         </div>
       `;
