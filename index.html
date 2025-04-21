@@ -430,3 +430,50 @@
     </div>
   </div>
 </div>
+<script>
+  // Add toggle effect for clicked buttons
+  document.querySelectorAll('.actions button').forEach(btn => {
+    btn.addEventListener('click', function () {
+      if (!this.closest('.like-wrapper')) {
+        this.classList.toggle('clicked');
+      }
+    });
+  });
+
+  // Reaction logic
+  document.querySelectorAll('.reactions-menu span').forEach(reaction => {
+    reaction.addEventListener('click', function () {
+      const wrapper = this.closest('.like-wrapper');
+      const button = wrapper.querySelector('button');
+      button.innerHTML = this.innerHTML + ' Reaccionar';
+      wrapper.querySelector('.reactions-menu').style.display = 'none';
+
+      // Ensure button is marked clicked
+      button.classList.add('clicked');
+    });
+  });
+
+  // Toggle reaction menu display
+  document.querySelectorAll('.like-wrapper button').forEach(button => {
+    button.addEventListener('click', function (e) {
+      const menu = this.nextElementSibling;
+      if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+      } else {
+        // Close all other open menus
+        document.querySelectorAll('.reactions-menu').forEach(m => m.style.display = 'none');
+        menu.style.display = 'flex';
+      }
+      e.stopPropagation(); // prevent bubbling
+    });
+  });
+
+  // Close reaction menus if clicking outside
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.reactions-menu').forEach(menu => {
+      menu.style.display = 'none';
+    });
+  });
+</script>
+</body>
+</html>
