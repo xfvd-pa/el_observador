@@ -57,6 +57,10 @@
       width: 100%;
       border-radius: 8px;
     }
+    .post-content a {
+      color: #1877f2;
+      text-decoration: none;
+    }
     .reactions {
       display: flex;
       align-items: center;
@@ -73,25 +77,6 @@
       padding-top: 10px;
       border-top: 1px solid #ccc;
     }
-    .actions .like-button {
-      position: relative;
-    }
-    .reactions-menu {
-      display: none;
-      position: absolute;
-      top: -50px;
-      left: -10px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 5px 10px;
-      z-index: 100;
-    }
-    .reactions-menu span {
-      cursor: pointer;
-      padding: 5px;
-      font-size: 18px;
-    }
     .actions button {
       background: none;
       border: none;
@@ -99,15 +84,40 @@
       font-size: 14px;
       cursor: pointer;
       position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .actions button.clicked {
+      color: #1877f2;
+      font-weight: bold;
     }
     .comment-section {
       margin-top: 10px;
     }
-    .comment-section input {
-      width: 100%;
-      padding: 8px;
-      border-radius: 20px;
-      border: 1px solid #ddd;
+    .comment {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .comment img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+    .comment-content {
+      background: #f0f2f5;
+      padding: 8px 12px;
+      border-radius: 18px;
+      max-width: 85%;
+    }
+    .comment-content strong {
+      font-size: 13px;
+    }
+    .comment-content p {
+      margin: 4px 0 0 0;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -116,126 +126,109 @@
     <h2>MiVoz</h2>
     <input type="text" placeholder="Buscar en MiVoz..." style="padding: 6px 12px; border-radius: 20px; border: 1px solid #ccc;">
   </div>
-
   <div class="container" id="feed-container"></div>
-
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const container = document.getElementById("feed-container");
+    const profilePics = [
+      "./assets/profile1.png",
+      "./assets/profile2.png",
+      "https://via.placeholder.com/30",
+      "https://via.placeholder.com/30"
+    ];
 
-      const posts = [
-        {
-          source: "DNVT Noticias",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 1 h",
-          text: "🚨 La DNVT decomisó más de 3,500 licencias en Semana Santa; se registraron 155 accidentes.",
-          image: "./assets/dnvt.png",
-          reactions: "😱 🚗",
-          count: 36
-        },
-        {
-          source: "EcoPolítica Noticias",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 2 h",
-          text: "⛪ “El Papa tilda a *todas* las mujeres de neuróticas en discurso polémico” — tergiversación intencional del mensaje real.",
-          image: "./assets/papa.png",
-          reactions: "😤 🙄",
-          count: 67
-        },
-        {
-          source: "Noticias Viral HN",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 3 h",
-          text: "⚡🔌 “Toda Honduras se quedará sin energía este lunes por apagón nacional”, afirma publicación viral — sin fuente oficial.",
-          image: "./assets/luz.png",
-          reactions: "😱 😬",
-          count: 128
-        },
-        {
-          source: "El Dato Curioso",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 4 h",
-          text: "🧠🚨 “Capturan a miembro de *los Illuminati* en Honduras: ¿fin del misterio?” — título viral alimenta teorías sin base.",
-          image: "./assets/illuminati.png",
-          reactions: "👀 🧠",
-          count: 54
-        },
-        {
-          source: "Tendencias HN",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 5 h",
-          text: "⚡🇭🇳 “Solo los ricos: el primer Cybertruck en Honduras genera indignación” — destaca polarización para maximizar clics.",
-          image: "./assets/tesla.png",
-          reactions: "😡 🚘",
-          count: 143
-        },
-        {
-          source: "Política Hoy",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 6 h",
-          text: "🗳️ BOMBA POLÍTICA: Yani Rosenthal y Nasralla habrían pactado en secreto repartirse el poder si ganan elecciones, según fuente anónima no verificada.",
-          image: "./assets/yani.png",
-          reactions: "😡 🤔",
-          count: 88
-        },
-        {
-          source: "Salud y Hogar HN",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 7 h",
-          text: "🍔 “La OMS advierte que en 2030 la mitad de los hondureños serán clínicamente obesos” — declaración sin base científica.",
-          image: "./assets/obesidad.png",
-          reactions: "😨 📉",
-          count: 102
-        },
-        {
-          source: "DGT Honduras",
-          avatar: "https://via.placeholder.com/40",
-          time: "Hace 8 h",
-          text: "📱🚗 DGT ahora revisa tus redes sociales para detectar si violaste las leyes de tránsito.",
-          image: "./assets/transito.png",
-          reactions: "👮 📲",
-          count: 18
-        }
-      ];
+    const posts = [
+      {
+        source: "DNVT Noticias",
+        time: "Hace 1 h",
+        text: "🚨 La DNVT decomisó más de 3,500 licencias en Semana Santa; se registraron 155 accidentes. <a href='https://www.tunota.com/honduras-hoy/dnvt-reporta-3500-licencias-decomisadas-y-155-accidentes-durante-semana-santa-2025-04-18' target='_blank'>Ver más</a>",
+        image: "./assets/dnvt.png"
+      },
+      {
+        source: "EcoPolítica Noticias",
+        time: "Hace 2 h",
+        text: "⛪ “El Papa tilda a *todas* las mujeres de neuróticas en discurso polémico” — tergiversación intencional del mensaje real.",
+        image: "./assets/papa.png"
+      },
+      {
+        source: "Noticias Viral HN",
+        time: "Hace 3 h",
+        text: "⚡🔌 “Toda Honduras se quedará sin energía este lunes por apagón nacional”, afirma publicación viral — sin fuente oficial.",
+        image: "./assets/luz.png"
+      },
+      {
+        source: "El Dato Curioso",
+        time: "Hace 4 h",
+        text: "🧠🚨 “Capturan a miembro de *los Illuminati* en Honduras: ¿fin del misterio?” — título viral alimenta teorías sin base.",
+        image: "./assets/illuminati.png"
+      },
+      {
+        source: "Tendencias HN",
+        time: "Hace 5 h",
+        text: "⚡🇭🇳 “Solo los ricos: el primer Cybertruck en Honduras genera indignación” — destaca polarización para maximizar clics. <a href='https://hch.tv/2024/08/29/el-tesla-cybertruck-debuta-en-honduras/' target='_blank'>Ver más</a>",
+        image: "./assets/tesla.png"
+      },
+      {
+        source: "Política Hoy",
+        time: "Hace 6 h",
+        text: "🗳️ BOMBA POLÍTICA: Yani Rosenthal y Nasralla habrían pactado en secreto repartirse el poder si ganan elecciones, según fuente anónima no verificada.",
+        image: "./assets/yani.png"
+      },
+      {
+        source: "Salud y Hogar HN",
+        time: "Hace 7 h",
+        text: "🍔 “La OMS advierte que en 2030 la mitad de los hondureños serán clínicamente obesos” — declaración sin base científica.",
+        image: "./assets/obesidad.png"
+      },
+      {
+        source: "DGT Honduras",
+        time: "Hace 8 h",
+        text: "📱🚗 DGT ahora revisa tus redes sociales para detectar si violaste las leyes de tránsito. <a href='https://www.latribuna.hn/2025/04/17/transito-monitorea-redes-sociales-para-detectar-infracciones-vehiculares/' target='_blank'>Ver más</a>",
+        image: "./assets/transito.png"
+      }
+    ];
 
-      posts.sort(() => Math.random() - 0.5).forEach(post => {
-        container.innerHTML += `
-          <div class="post">
-            <div class="post-header">
-              <img src="${post.avatar}" alt="perfil">
-              <div class="info">
-                <strong>${post.source}</strong>
-                <small>${post.time} · 🌐 Público</small>
-              </div>
-            </div>
-            <div class="post-content">
-              <p>${post.text}</p>
-              <img src="${post.image}" alt="imagen de noticia">
-            </div>
-            <div class="reactions">${post.reactions} <span>${post.count}</span></div>
-            <div class="actions">
-              <div class="like-button">
-                <button onmouseover="this.nextElementSibling.style.display='flex'" onmouseout="this.nextElementSibling.style.display='none'">
-                  👍 Reaccionar
-                </button>
-                <div class="reactions-menu" onmouseover="this.style.display='flex'" onmouseout="this.style.display='none'">
-                  <span>👍</span>
-                  <span>❤️</span>
-                  <span>😲</span>
-                  <span>😡</span>
-                  <span>😂</span>
-                </div>
-              </div>
-              <button>💬 Comentar</button>
-              <button>🔁 Compartir</button>
-              <button>🚩 Reportar</button>
-            </div>
-            <div class="comment-section">
-              <input type="text" placeholder="Escribe un comentario...">
+    const comments = [
+      { name: "Carla F.", pic: profilePics[0], text: "This can't be real..." },
+      { name: "Luis H.", pic: profilePics[1], text: "We need more info before believing this." }
+    ];
+
+    const container = document.getElementById("feed-container");
+    posts.forEach(post => {
+      let commentHTML = comments.map(c => `
+        <div class='comment'>
+          <img src="${c.pic}" alt="profile">
+          <div class='comment-content'>
+            <strong>${c.name}</strong>
+            <p>${c.text}</p>
+          </div>
+        </div>
+      `).join('');
+
+      container.innerHTML += `
+        <div class="post">
+          <div class="post-header">
+            <img src="https://via.placeholder.com/40" alt="perfil">
+            <div class="info">
+              <strong>${post.source}</strong>
+              <small>${post.time} · 🌐 Público</small>
             </div>
           </div>
-        `;
-      });
+          <div class="post-content">
+            <p>${post.text}</p>
+            <img src="${post.image}" alt="imagen">
+          </div>
+          <div class="reactions">👍 ❤️ 😲 😡 😂 <span>18</span></div>
+          <div class="actions">
+            <button onclick="this.classList.toggle('clicked')">👍 Like</button>
+            <button onclick="this.classList.toggle('clicked')">💬 Comment</button>
+            <button onclick="this.classList.toggle('clicked')">🔁 Share</button>
+            <button onclick="this.classList.toggle('clicked')">🚩 Flag</button>
+          </div>
+          <div class="comment-section">
+            ${commentHTML}
+            <input type="text" placeholder="Escribe un comentario...">
+          </div>
+        </div>
+      `;
     });
   </script>
 </body>
