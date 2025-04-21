@@ -73,12 +73,32 @@
       padding-top: 10px;
       border-top: 1px solid #ccc;
     }
+    .actions .like-button {
+      position: relative;
+    }
+    .reactions-menu {
+      display: none;
+      position: absolute;
+      top: -50px;
+      left: -10px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 5px 10px;
+      z-index: 100;
+    }
+    .reactions-menu span {
+      cursor: pointer;
+      padding: 5px;
+      font-size: 18px;
+    }
     .actions button {
       background: none;
       border: none;
       color: #65676b;
       font-size: 14px;
       cursor: pointer;
+      position: relative;
     }
     .comment-section {
       margin-top: 10px;
@@ -153,7 +173,7 @@
           source: "Política Hoy",
           avatar: "https://via.placeholder.com/40",
           time: "Hace 6 h",
-          text: "🗳️ “Yani Rosenthal confirma pacto secreto con Salvador Nasralla para repartirse poder tras elecciones” — sin evidencia clara.",
+          text: "🗳️ BOMBA POLÍTICA: Yani Rosenthal y Nasralla habrían pactado en secreto repartirse el poder si ganan elecciones, según fuente anónima no verificada.",
           image: "./assets/yani.png",
           reactions: "😡 🤔",
           count: 88
@@ -175,7 +195,7 @@
           image: "./assets/transito.png",
           reactions: "👮 📲",
           count: 18
-        },
+        }
       ];
 
       posts.sort(() => Math.random() - 0.5).forEach(post => {
@@ -194,9 +214,21 @@
             </div>
             <div class="reactions">${post.reactions} <span>${post.count}</span></div>
             <div class="actions">
-              <button>👍 Me gusta</button>
+              <div class="like-button">
+                <button onmouseover="this.nextElementSibling.style.display='flex'" onmouseout="this.nextElementSibling.style.display='none'">
+                  👍 Reaccionar
+                </button>
+                <div class="reactions-menu" onmouseover="this.style.display='flex'" onmouseout="this.style.display='none'">
+                  <span>👍</span>
+                  <span>❤️</span>
+                  <span>😲</span>
+                  <span>😡</span>
+                  <span>😂</span>
+                </div>
+              </div>
               <button>💬 Comentar</button>
               <button>🔁 Compartir</button>
+              <button>🚩 Reportar</button>
             </div>
             <div class="comment-section">
               <input type="text" placeholder="Escribe un comentario...">
