@@ -94,19 +94,33 @@
       position: relative;
     }
     .reactions-menu {
-      display: none;
-      position: absolute;
-      top: -40px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 5px 10px;
-      z-index: 100;
+     display: flex;
+     position: absolute;
+     top: -45px;
+     left: 0;
+     background: white;
+     border-radius: 20px;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+     padding: 5px 10px;
+     gap: 5px;
+     z-index: 100;
+     opacity: 0;
+     pointer-events: none;
+     transition: opacity 0.2s ease-in-out;
     }
+    .like-wrapper:hover .reactions-menu {
+    opacity: 1;
+     pointer-events: auto;
+     }
+    
     .reactions-menu span {
       cursor: pointer;
       padding: 5px;
       font-size: 18px;
+      transition: transform 0.1s;
+    }
+    .reactions-menu span:hover {
+     transform: scale(1.3);
     }
     .comment-section {
       margin-top: 10px;
@@ -439,41 +453,22 @@
       }
     });
   });
-
-  // Reaction logic
-  document.querySelectorAll('.reactions-menu span').forEach(reaction => {
-    reaction.addEventListener('click', function () {
+ <script>
+  // Handle clicking a reaction
+  document.querySelectorAll('.reactions-menu span').forEach(span => {
+    span.addEventListener('click', function () {
       const wrapper = this.closest('.like-wrapper');
-      const button = wrapper.querySelector('button');
+      const button = wrapper.querySelector('.react-button');
+
+      // Update the button with the selected emoji
       button.innerHTML = this.innerHTML + ' Reaccionar';
-      wrapper.querySelector('.reactions-menu').style.display = 'none';
 
-      // Ensure button is marked clicked
-      button.classList.add('clicked');
+      // Hide menu manually (since we won't rely on hover anymore after click)
+      wrapper.querySelector('.reactions-menu').style.opacity = '0';
+      wrapper.querySelector('.reactions-menu').style.pointerEvents = 'none';
     });
   });
-
-  // Toggle reaction menu display
-  document.querySelectorAll('.like-wrapper button').forEach(button => {
-    button.addEventListener('click', function (e) {
-      const menu = this.nextElementSibling;
-      if (menu.style.display === 'flex') {
-        menu.style.display = 'none';
-      } else {
-        // Close all other open menus
-        document.querySelectorAll('.reactions-menu').forEach(m => m.style.display = 'none');
-        menu.style.display = 'flex';
-      }
-      e.stopPropagation(); // prevent bubbling
-    });
-  });
-
-  // Close reaction menus if clicking outside
-  document.addEventListener('click', function () {
-    document.querySelectorAll('.reactions-menu').forEach(menu => {
-      menu.style.display = 'none';
-    });
-  });
+</script>
 </script>
 </body>
 </html>
