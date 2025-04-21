@@ -466,6 +466,20 @@
       // Hide menu manually (since we won't rely on hover anymore after click)
       wrapper.querySelector('.reactions-menu').style.opacity = '0';
       wrapper.querySelector('.reactions-menu').style.pointerEvents = 'none';
+
+      document.querySelectorAll('.reactions-menu span').forEach(span => {
+    span.addEventListener('click', function (e) {
+      e.stopPropagation(); // prevent it from closing if clicked
+      const wrapper = this.closest('.like-wrapper');
+      const button = wrapper.querySelector('.react-button');
+
+      // Update button text with selected emoji
+      button.innerHTML = this.innerHTML + ' Reaccionar';
+
+      // Hide the menu after selection
+      wrapper.querySelector('.reactions-menu').style.opacity = '0';
+      wrapper.querySelector('.reactions-menu').style.pointerEvents = 'none';
+      
     });
   });
 </script>
