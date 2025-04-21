@@ -127,6 +127,10 @@
       margin: 4px 0 0 0;
       font-size: 14px;
     }
+    .comment-content small {
+      color: gray;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -137,36 +141,40 @@
   <div class="container" id="feed-container"></div>
   <script>
     const profilePics = [
-      "./assets/profile1.png",
-      "./assets/profile2.png",
-      "./assets/profile3.png",
-      "./assets/profile4.png",
-      "https://via.placeholder.com/30"
+      "./assets/prof1.jpg",
+      "./assets/prof2.jpg",
+      "./assets/prof3.jpg",
+      "./assets/prof4.jpg",
+      "./assets/prof5.jpg",
+      "./assets/prof6.jpg",
+      "./assets/prof7.jpg",
+      "./assets/prof8.jpg",
+      "./assets/prof9.jpg"
     ];
 
     const commentData = [
       [
-        { name: "Ana H.", pic: profilePics[0], text: "This is impressive, finally some enforcement." }
+        { name: "Ana H.", pic: profilePics[0], text: "Esto es impresionante, por fin aplican la ley." }
       ],
       [
-        { name: "Mario T.", pic: profilePics[1], text: "Not sure I trust this info..." }
+        { name: "Mario T.", pic: profilePics[1], text: "No estoy seguro de confiar en esta noticia..." }
       ],
       [
-        { name: "Paola R.", pic: profilePics[2], text: "Ugh, another blackout, prepare your candles!" },
-        { name: "Joel B.", pic: profilePics[3], text: "I just bought ice cream... classic timing." }
-      ],
-      [],
-      [
-        { name: "Lucía V.", pic: profilePics[1], text: "It’s just a car, people..." },
-        { name: "Karla C.", pic: profilePics[0], text: "Crazy how this made it here!" }
-      ],
-      [
-        { name: "Ernesto M.", pic: profilePics[4], text: "This better not be true. Shady deal!" }
+        { name: "Paola R.", pic: profilePics[2], text: "Otra vez apagones, a preparar las velas." },
+        { name: "Joel B.", pic: profilePics[3], text: "Acabo de comprar helado... justo ahora pasa esto." }
       ],
       [],
       [
-        { name: "Lilian Q.", pic: profilePics[3], text: "So now they’re watching our memes too?" },
-        { name: "Pedro Z.", pic: profilePics[0], text: "A friend got fined this way. Real story." }
+        { name: "Lucía V.", pic: profilePics[4], text: "Es solo un carro, no exageren." },
+        { name: "Karla C.", pic: profilePics[5], text: "Increíble que haya llegado hasta aquí." }
+      ],
+      [
+        { name: "Ernesto M.", pic: profilePics[6], text: "Ojalá no sea cierto. Muy sospechoso todo." }
+      ],
+      [],
+      [
+        { name: "Lilian Q.", pic: profilePics[7], text: "¿También van a revisar mis memes ahora?" },
+        { name: "Pedro Z.", pic: profilePics[8], text: "A un amigo ya le pusieron multa así. Es real." }
       ]
     ];
 
@@ -230,11 +238,11 @@
           <div class='comment-content'>
             <strong>${c.name}</strong>
             <p>${c.text}</p>
+            <small>Hace ${Math.floor(Math.random() * 45 + 1)} min · 👍 ${Math.floor(Math.random() * 10)}</small>
           </div>
         </div>
       `).join('');
 
-      const randomCount = Math.floor(Math.random() * 30 + 1);
       container.innerHTML += `
         <div class="post">
           <div class="post-header">
