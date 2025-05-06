@@ -574,31 +574,31 @@
     });
   });
  <script>
-  // Handle clicking a reaction
+  // Highlight comment/share/report buttons
+  document.querySelectorAll('.actions button:not(.react-button)').forEach(button => {
+    button.addEventListener('click', () => {
+      button.classList.toggle('clicked');
+    });
+  });
+
+  // Handle emoji reactions and show chosen emoji persistently
   document.querySelectorAll('.reactions-menu span').forEach(span => {
-    span.addEventListener('click', function () {
-      const wrapper = this.closest('.like-wrapper');
-      const button = wrapper.querySelector('.react-button');
-
-      // Update the button with the selected emoji
-      button.innerHTML = this.innerHTML + ' Reaccionar';
-
-      // Hide menu manually (since we won't rely on hover anymore after click)
-      wrapper.querySelector('.reactions-menu').style.opacity = '0';
-      wrapper.querySelector('.reactions-menu').style.pointerEvents = 'none';
-
-      document.querySelectorAll('.reactions-menu span').forEach(span => {
     span.addEventListener('click', function (e) {
-      e.stopPropagation(); // prevent it from closing if clicked
+      e.stopPropagation();
+
       const wrapper = this.closest('.like-wrapper');
       const button = wrapper.querySelector('.react-button');
 
-      // Update button text with selected emoji
-      button.innerHTML = this.innerHTML + ' Reaccionar';
+      const emoji = this.innerHTML;
+
+      // Update the button with selected emoji
+      button.innerHTML = emoji + ' Reaccionar';
+      button.classList.add('clicked');
 
       // Hide the menu after selection
-      wrapper.querySelector('.reactions-menu').style.opacity = '0';
-      wrapper.querySelector('.reactions-menu').style.pointerEvents = 'none';
+      const menu = wrapper.querySelector('.reactions-menu');
+      menu.style.opacity = '0';
+      menu.style.pointerEvents = 'none';
       
     });
   });
