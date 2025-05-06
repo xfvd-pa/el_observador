@@ -203,7 +203,7 @@
 </div>
       <div class="actions">
         <div class="like-wrapper">
-          <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+          <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
           <div class="reactions-menu">
             <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
           </div>
@@ -252,7 +252,7 @@
 </div>
       <div class="actions">
         <div class="like-wrapper">
-          <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+          <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
           <div class="reactions-menu">
             <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
           </div>
@@ -291,7 +291,7 @@
 </div>
       <div class="actions">
         <div class="like-wrapper">
-          <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+          <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
           <div class="reactions-menu">
             <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
           </div>
@@ -347,8 +347,7 @@
 </div>
   <div class="actions">
     <div class="like-wrapper">
-      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
-      <div class="reactions-menu">
+      <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>      <div class="reactions-menu">
         <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
       </div>
     </div>
@@ -386,8 +385,7 @@
 </div>
   <div class="actions">
     <div class="like-wrapper">
-      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
-      <div class="reactions-menu">
+      <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>      <div class="reactions-menu">
         <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
       </div>
     </div>
@@ -443,7 +441,7 @@
 </div>
   <div class="actions">
     <div class="like-wrapper">
-      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
       <div class="reactions-menu">
         <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
       </div>
@@ -492,8 +490,7 @@
 </div>
   <div class="actions">
     <div class="like-wrapper">
-      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
-      <div class="reactions-menu">
+      <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>      <div class="reactions-menu">
         <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
       </div>
     </div>
@@ -531,7 +528,7 @@
 </div>
   <div class="actions">
     <div class="like-wrapper">
-      <button onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
+      <button class="react-button" onclick="this.classList.toggle('clicked'); this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'flex' ? 'none' : 'flex';">👍 Reaccionar</button>
       <div class="reactions-menu">
         <span>❤️</span><span>😲</span><span>😡</span><span>😂</span><span>👍</span>
       </div>
@@ -574,14 +571,14 @@
     });
   });
  <script>
-  // Highlight comment/share/report buttons
+   // Handle highlighting of buttons (except Reaccionar)
   document.querySelectorAll('.actions button:not(.react-button)').forEach(button => {
     button.addEventListener('click', () => {
       button.classList.toggle('clicked');
     });
   });
 
-  // Handle emoji reactions and show chosen emoji persistently
+  // Handle emoji reaction selection
   document.querySelectorAll('.reactions-menu span').forEach(span => {
     span.addEventListener('click', function (e) {
       e.stopPropagation();
@@ -589,13 +586,10 @@
       const wrapper = this.closest('.like-wrapper');
       const button = wrapper.querySelector('.react-button');
 
-      const emoji = this.innerHTML;
-
-      // Update the button with selected emoji
+      const emoji = this.textContent;
       button.innerHTML = emoji + ' Reaccionar';
       button.classList.add('clicked');
 
-      // Hide the menu after selection
       const menu = wrapper.querySelector('.reactions-menu');
       menu.style.opacity = '0';
       menu.style.pointerEvents = 'none';
